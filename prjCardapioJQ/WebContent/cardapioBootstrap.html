@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	 crossorigin="anonymous">
+
+	<title>Atividade 7 - Com Bootstrap</title>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+	<div style="margin-top: 20px; margin-left: 40%">
+		<h1>Escolha o seu prato</h1><br>
+		<label for="exampleFormControlSelect1">Prato principal: </label>
+		<div class="form-check" style="display: inline;">
+			<input class="form-check-input" type="radio" name="principal" id="exampleRadios1" value="14.8" checked>
+			<label class="form-check-label" for="exampleRadios1">
+				Massa
+			</label>
+		</div>
+		<div class="form-check" style="display: inline;">
+			<input class="form-check-input" type="radio" name="principal" id="exampleRadios1" value="18.2">
+			<label class="form-check-label" for="exampleRadios1">
+				Carne
+			</label>
+		</div>
+		<div class="form-check" style="display: inline;">
+			<input class="form-check-input" type="radio" name="principal" id="exampleRadios1" value="17.5">
+			<label class="form-check-label" for="exampleRadios1">
+				Peixe
+			</label>
+		</div>
+		<br><br>
+		<h3>Acompanhamentos:</h3>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" name="acompanhamento" value="8" id="defaultCheck1">
+			<label class="form-check-label" for="defaultCheck1">
+				Salada
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" name="acompanhamento" value="5.5" id="defaultCheck1">
+			<label class="form-check-label" for="defaultCheck1">
+				Legumes
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" name="acompanhamento" value="3.5" id="defaultCheck1">
+			<label class="form-check-label" for="defaultCheck1">
+				Farofa
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" name="acompanhamento" value="12" id="defaultCheck1">
+			<label class="form-check-label" for="defaultCheck1">
+				Fritas
+			</label>
+		</div>
+		<div class="form-group" style="margin-top: 15px;">
+			<label for="exampleFormControlSelect1">Convênio:</label>
+			<select class="form-control" id="exampleFormControlSelect1" style="width: 150px;">
+				<option value="12.5">Placomp</option>
+				<option value="8">Abutua</option>
+				<option value="18.7">Google</option>
+				<option value="15">Prefeitura</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Observações:</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="width: 250px;"></textarea>
+		</div>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+		  Calcular Total
+		</button>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Total da Refeição</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		         
+		      <script>
+		      	$(document).ready(function(){
+		      		$(".btn").click(function(){
+		      			var soma = 0;
+		      			$("input:checked").each(function () {
+		      		        var id = parseFloat($(this).attr("value"));
+		      		        soma += id;
+		      		    });
+		      			var desconto = parseFloat($("#exampleFormControlSelect1 option:selected").attr("value"));
+		      			soma = soma - (soma * desconto / 100);
+		      			$(".modal-body").html("O valor total da refeição é de: R$ " + soma.toFixed(2));
+		      		});
+		      	});
+		      </script>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	 crossorigin="anonymous"></script>
+</body>
+
+</html>
