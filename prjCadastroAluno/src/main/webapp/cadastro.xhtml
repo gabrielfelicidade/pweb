@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+
+	<h:form id="formAluno">
+		<p:panelGrid columns="2">
+			<p:outputLabel for="ra" value="RA" />
+			<p:inputText id="ra" value="#{alunoMB.aluno.ra}" required="true">
+				<p:keyFilter mask="num" />
+			</p:inputText>
+
+			<p:outputLabel for="nome" value="Nome" />
+			<p:inputText id="nome" value="#{alunoMB.aluno.nome}" required="true" />
+
+			<p:outputLabel for="dtNasc" value="Data de Nascimento" />
+			<p:inputMask id="dtNasc" value="#{alunoMB.aluno.dataNascimento}"
+				mask="99/99/9999" required="true" />
+
+			<p:outputLabel for="cpf" value="CPF" />
+			<p:inputMask id="cpf" widgetVar="cpf" value="#{alunoMB.aluno.cpf}"
+				mask="99.999.999-99?9" onkeyup="mask()" onblur="limpar()" required="true" />
+		</p:panelGrid>
+
+		<p:commandButton value="Salvar" action="#{alunoMB.salvar()}"
+			update=":formAluno"
+			style="margin-top: 30px; margin-left: 12%; margin-bottom: 70px;" />
+
+		<p:dataTable value="#{alunoMB.getAlunos()}" var="aluno">
+			<p:column headerText="RA" style="text-align: center;">
+				<h:outputText value="#{aluno.ra}" />
+			</p:column>
+			<p:column headerText="Nome" style="text-align: center;">
+				<h:outputText value="#{aluno.nome}" />
+			</p:column>
+			<p:column headerText="Data de Nascimento" style="text-align: center;">
+				<h:outputText value="#{aluno.dataNascimento}" />
+			</p:column>
+			<p:column headerText="CPF" style="text-align: center;">
+				<h:outputText value="#{aluno.cpf}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<script>
+		function mask(){
+			var cpf = PF('cpf');
+			if(cpf.jq.val().replace(/_/g, '').length > 13){
+				cpf.jq.mask('999.999.999-99', {autoclear: false});
+			}else{
+				cpf.jq.mask('99.999.999-99?9', {autoclear: false});
+			}
+		}
+		function limpar(){
+			var cpf = PF('cpf');
+			if(!(cpf.jq.val().replace(/_/g, '').length >= 13)){
+				cpf.jq.mask('99.999.999-99?9', {autoclear: true});
+			}
+		}
+	</script>
+</h:body>
+</html>
